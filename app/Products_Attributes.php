@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Products_Attributes extends Model
 {
     protected $fillable = [
-        'product_id', 'accompaniment', 'size' , 'price', 'id'
+        'product_id', 'size' , 'price',
     ];
 
     public function products() {
@@ -15,6 +15,6 @@ class Products_Attributes extends Model
     }
 
     public function orderProduct() {
-    	return $this->belongsTo('App\OrderProduct', 'accompaniment_id', 'id');
+    	return $this->belongsTo('App\OrderProduct',  'id');
     }
 }

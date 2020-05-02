@@ -39,6 +39,10 @@
                               <i class="fa fa-edit text-blue"></i>
                           </a>
                           /
+                           <a href="#" @click="attributeModal(product)">
+                              <i class="fa fa-edit text-blue"></i>
+                          </a>
+                          /
                            <a href="#" @click="deleteProduct(product.id)">
                               <i class="fa fa-trash text-red"></i>
                           </a>
@@ -116,6 +120,47 @@
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="attributeModal" tabindex="-1" role="dialog" aria-labelledby="attributeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"  id="attributeModalLabel">Add Product Attribute Info</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form @submit.prevent = "addAttribute()">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input v-model="form.size" type="text" name="size" placeholder="Add size"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('size') }">
+                            <has-error :form="form" field="size"></has-error>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="controls">
+                                <select name="product_id" v-model="form.product_id" id="product_id" class="form-control" :class="{ 'is-invalid': form.errors.has('product_id') }">
+                                    <option value="">Select Product </option>
+                                    <option v-for="product in products.data" :key="product.id " :value="product.id ">{{product.product_name}}</option>
+                                </select>
+                            </div>
+                            <has-error :form="form" field="product_id"></has-error>
+                        </div>
+                        <div class="form-group">
+                            <input v-model="form.price" type="text" name="price" placeholder="Price"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('price') }">
+                            <has-error :form="form" field="price"></has-error>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button  type="submit" class="btn btn-success">Update</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -135,7 +180,9 @@
                     product_name: '',
                     product_code: '',
                     category_id: '',
+                    product_id: '',
                     description: '',
+                    size: '',
                     price: '',
                     photo: ''
                 })
@@ -166,12 +213,17 @@
                 .catch(()=>{
                     //else throw an error
                     this.$Progress.fail();
-                    swal("Failed!", "There was Something Wrong.", "Warning");
+                    Swal("Failed!", "There was Something Wrong.", "Warning");
                 });
             },
             editModal(product){
                 this.editmode = true;
                 $('#productModal').modal('show');
+                this.form.fill(product);
+            },
+
+            attributeModal(product){
+                $('#attributeModal').modal('show');
                 this.form.fill(product);
             },
             newModal(){
@@ -199,7 +251,7 @@
                                     )
                                 Fire.$emit('AfterCreate');
                             }).catch(()=>{
-                                swal("Failed!", "There was Something Wrong.", "Warning");
+                                Swal("Failed!", "There was Something Wrong.", "Warning");
                             });
                         }
                     })
@@ -238,6 +290,25 @@
                     Toast.fire({
                         icon: 'success',
                         title: 'Product Created Successfully'
+                    })
+                    this.$Progress.finish();
+                })
+                .catch(()=>{
+                    this.$Progress.fail();
+
+                })
+            },
+             addAttribute(){
+                // [Product.vue specific] When Product.vue is first loaded start the progress bar
+                this.$Progress.start();
+                this.form.post('api/attributes')
+                .then(()=>{
+                    Fire.$emit('AfterCreate');
+                    //  [Product.vue specific] When Product.vue is finish loading finish the progress bar
+                    $('#attributeModal').modal('hide')
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Attribute Added Successfully'
                     })
                     this.$Progress.finish();
                 })

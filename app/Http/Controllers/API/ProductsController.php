@@ -93,15 +93,30 @@ class ProductsController extends Controller
         //validate product information
         $this->validate($request, [
             'product_name' => 'required|string|max:191',
-            'product_code' => 'required|string|max:191',
-            'category_id' => 'required|max:20',
+            'category_id' => 'required|integer|max:191',
             'description' => 'required|string|max:191',
-            'price' => 'required|integer',
-            'photo' => 'required|string|max:191',
+            'product_code' => 'required|string|max:191',
         ]);
-        //update product
-         $products->update($request->all());
+        //check for current photo
+        $currentPhoto = $products->photo;
+        //Upload Image
+        if($request->photo != $currentPhoto){
+            $imgUpload = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+            \Image::make($request->photo)->save(public_path('images/products/').$imgUpload);
+            //upload to the db using the merge function
+            $request->merge(['photo' =>$imgUpload]);
+
+            //delete old photo if user updates their Slider picture
+            $oldPhoto = public_path('images/products/').$currentPhoto;
+            if (file_exists($oldPhoto)) {
+                @unlink($oldPhoto);
+            }
+
+        }
+        //update products
+        $products->update($request->all());
         //return ['message'=>'updating'];
+
     }
 
     /**

@@ -43,9 +43,4 @@ class Order extends Model
         return $this->hasMany('App\DeliveryDetails', 'order_id', 'id');
     }
 
-    public function paymentDetails()
-    {
-        return $this->hasMany('App\PaymentDetails', 'order_id', 'id');
-    }
-
 }

@@ -15,10 +15,10 @@ import Gate from "./Gate";
 Vue.prototype.$gate = new Gate(window.user);
 
 
-import swal from 'sweetalert2'
-window.swal = swal;
+import Swal from 'sweetalert2'
+window.Swal = Swal;
 
-const toast = swal.mixin({
+const toast = Swal.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,

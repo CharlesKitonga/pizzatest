@@ -2537,6 +2537,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2552,7 +2597,9 @@ __webpack_require__.r(__webpack_exports__);
         product_name: '',
         product_code: '',
         category_id: '',
+        product_id: '',
         description: '',
+        size: '',
         price: '',
         photo: ''
       })
@@ -2584,12 +2631,16 @@ __webpack_require__.r(__webpack_exports__);
         //else throw an error
         _this2.$Progress.fail();
 
-        swal("Failed!", "There was Something Wrong.", "Warning");
+        Swal("Failed!", "There was Something Wrong.", "Warning");
       });
     },
     editModal: function editModal(product) {
       this.editmode = true;
       $('#productModal').modal('show');
+      this.form.fill(product);
+    },
+    attributeModal: function attributeModal(product) {
+      $('#attributeModal').modal('show');
       this.form.fill(product);
     },
     newModal: function newModal() {
@@ -2615,7 +2666,7 @@ __webpack_require__.r(__webpack_exports__);
             Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             Fire.$emit('AfterCreate');
           })["catch"](function () {
-            swal("Failed!", "There was Something Wrong.", "Warning");
+            Swal("Failed!", "There was Something Wrong.", "Warning");
           });
         }
       });
@@ -2671,17 +2722,36 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function () {
         _this6.$Progress.fail();
       });
+    },
+    addAttribute: function addAttribute() {
+      var _this7 = this;
+
+      // [Product.vue specific] When Product.vue is first loaded start the progress bar
+      this.$Progress.start();
+      this.form.post('api/attributes').then(function () {
+        Fire.$emit('AfterCreate'); //  [Product.vue specific] When Product.vue is finish loading finish the progress bar
+
+        $('#attributeModal').modal('hide');
+        Toast.fire({
+          icon: 'success',
+          title: 'Attribute Added Successfully'
+        });
+
+        _this7.$Progress.finish();
+      })["catch"](function () {
+        _this7.$Progress.fail();
+      });
     }
   },
   created: function created() {
-    var _this7 = this;
+    var _this8 = this;
 
     this.loadCategories();
     /* this method sends http request every three seconds */
     //setInterval(() => this.loadCategories(), 3000);
 
     Fire.$on('AfterCreate', function () {
-      _this7.loadCategories();
+      _this8.loadCategories();
     });
   }
 });
@@ -67391,6 +67461,21 @@ var render = function() {
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
+                              return _vm.attributeModal(product)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-edit text-blue" })]
+                      ),
+                      _vm._v(
+                        "\n                      /\n                       "
+                      ),
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
                               return _vm.deleteProduct(product.id)
                             }
                           }
@@ -67792,6 +67877,196 @@ var render = function() {
           ]
         )
       ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "attributeModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "attributeModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.addAttribute()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.size,
+                              expression: "form.size"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: { "is-invalid": _vm.form.errors.has("size") },
+                          attrs: {
+                            type: "text",
+                            name: "size",
+                            placeholder: "Add size"
+                          },
+                          domProps: { value: _vm.form.size },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "size", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "size" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("div", { staticClass: "controls" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.product_id,
+                                  expression: "form.product_id"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("product_id")
+                              },
+                              attrs: { name: "product_id", id: "product_id" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "product_id",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "" } }, [
+                                _vm._v("Select Product ")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.products.data, function(product) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: product.id,
+                                    domProps: { value: product.id }
+                                  },
+                                  [_vm._v(_vm._s(product.product_name))]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "product_id" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.price,
+                              expression: "form.price"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: { "is-invalid": _vm.form.errors.has("price") },
+                          attrs: {
+                            type: "text",
+                            name: "price",
+                            placeholder: "Price"
+                          },
+                          domProps: { value: _vm.form.price },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "price", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "price" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ]
+              )
+            ])
+          ]
+        )
+      ]
     )
   ])
 }
@@ -67834,6 +68109,52 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "attributeModalLabel" } },
+        [_vm._v("Add Product Attribute Info")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Update")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -85084,7 +85405,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.prototype.$gate = new _Gate__WEBPACK_IMPORTED_MODULE_2__["default"](window.user);
 
-window.swal = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a;
+window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a;
 var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.mixin({
   toast: true,
   position: 'top-end',

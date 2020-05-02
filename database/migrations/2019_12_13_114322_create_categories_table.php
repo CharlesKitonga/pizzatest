@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->string('url');
             $table->string('photo');
             $table->string('status');
+            $table->tinyInteger('activate_categories');
             $table->timestamps();
         });
     }
