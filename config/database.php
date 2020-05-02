@@ -43,8 +43,8 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
         'mysql' => [
-            
-            $url = parse_url(getenv("mysql://bba433cea0a669:783fc284@us-cdbr-east-06.cleardb.net/heroku_0e5745a6dcb7cc4?reconnect=true"));
+
+            $url = parse_url(getenv("mysql://bba433cea0a669:783fc284@us-cdbr-east-06.cleardb.net/heroku_0e5745a6dcb7cc4?reconnect=true")),
 
             $host = $url["127.0.0.1"],
             $username = $url["pizza_kyalo"],
