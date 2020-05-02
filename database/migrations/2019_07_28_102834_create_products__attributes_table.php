@@ -15,7 +15,7 @@ class CreateProductsAttributesTable extends Migration
     {
         Schema::create('products__attributes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unasignedBigInteger('product_id');
+            $table->unsignedBigInteger('product_id');
             $table->string('size');
             $table->float('price');
             $table->timestamps();
