@@ -56,7 +56,7 @@
                                             </div>
                                                 {{--@if(!empty($details['accompaniment']))--}}
                                                     {{--<span class="name"> + {{ $details['accompaniment'] }} 
-                                                        {{ $details['accompaniment_price'] ? '(Ksh. '.$details['accompaniment_price'] . ')' : '' }}
+                                                        {{ $details['accompaniment_price'] ? '($. '.$details['accompaniment_price'] . ')' : '' }}
                                                     </span>--}}
                                                 {{--@endif--}}
                                             <br />
@@ -64,8 +64,8 @@
                                                 <span class="name">Size : {{$details['accompaniment_size']}}</span>
                                             @endif
                                             <div class="col-4">
-                                                <div class=" price">Ksh. {{ $details['price'] }}</div>
-                                                {{--<div class="price">Ksh. {{ $details['price'] * $details['quantity'] }}</div>--}}
+                                                <div class=" price">$. {{ $details['price'] }}</div>
+                                                {{--<div class="price">$. {{ $details['price'] * $details['quantity'] }}</div>--}}
                                             </div>
                                         @endforeach
                                     @endif
@@ -73,12 +73,12 @@
                                 <div class="cart-summary">
                                     <div class="row">
                                         <div class="col-7 text-right text-muted">Order total:</div>
-                                        <div class="col-5"><strong>Ksh. {{$total }}</strong></div>
+                                        <div class="col-5"><strong>$. {{$total }}</strong></div>
                                     </div>
                                     <hr class="hr-sm" id="deliveryDetailsHr">
                                     <div class="row" id="deliveryChargeViewDiv">
                                         <div class="col-7 text-right text-muted">Delivery charge:</div>
-                                    <div class="col-5" id="deliveryChargeView"><strong>Ksh. {{ session('delivery_details') ? session('delivery_details')['deliveryPrice'] : 0 }}</strong></div>
+                                    <div class="col-5" id="deliveryChargeView"><strong>$. {{ session('delivery_details') ? session('delivery_details')['deliveryPrice'] : 0 }}</strong></div>
                                     </div>
                                     <div class="row" id="deliveryDescriptionDiv">
                                         <div class="col-12 text-muted" id="deliveryDescription"><center><small>{{ session('delivery_details') ? 'Delivery time: ' . session('delivery_details')['duration'] . ' minute(s), Delivery distance: ' . session('delivery_details')['distance'] . ' km(s)' : '' }}</small></center></div>
@@ -86,7 +86,7 @@
                                     <hr class="hr-sm">
                                     <div class="row text-md">
                                         <div class="col-7 text-right text-muted">Total:</div>
-                                        <div class="col-5" id="totalDisplay"><strong>Ksh. {{ session('delivery_details') ? ((int) session('delivery_details')['deliveryPrice'] + (int) $total) : $total }}</strong></div>
+                                        <div class="col-5" id="totalDisplay"><strong>$. {{ session('delivery_details') ? ((int) session('delivery_details')['deliveryPrice'] + (int) $total) : $total }}</strong></div>
                                     </div>
                                 </div>
                             </div>

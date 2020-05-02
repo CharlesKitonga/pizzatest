@@ -76,14 +76,14 @@ $mobileMenu = Controller::mobileMenu();
                                                 {!! csrf_field() !!}
                                                 <input name="quantity" style="width: 50px;" type="number" value="{{ $details['quantity'] }}" class="name" min="1" max="10" /><br />
                                                 @if(!empty($details['accompaniment']))
-                                                    <span class="name"> + {{ $details['accompaniment'] }} {{ $details['accompaniment_price'] ? '(Ksh. ' . $details['accompaniment_price'] . ')' : '' }}</span>
+                                                    <span class="name"> + {{ $details['accompaniment'] }} {{ $details['accompaniment_price'] ? '($. ' . $details['accompaniment_price'] . ')' : '' }}</span>
                                                 @endif
                                                 @if(!empty($details['accompaniment_size']))
                                                     <span class="name">Size : {{$details['accompaniment_size']}}</span>
                                                 @endif
                                         </td>
-                                        <td id="getPrice" class="price">Ksh. {{ $details['price'] }} </td>
-                                        <td id="itemTotal" class="price">Ksh. {{ $details['price'] * $details['quantity'] }} </td>
+                                        <td id="getPrice" class="price">$. {{ $details['price'] }} </td>
+                                        <td id="itemTotal" class="price">$. {{ $details['price'] * $details['quantity'] }} </td>
                                         <td class="actions">
                                                 {{-- <a href="{{url('/cart/update-cart/'.$id)}}" class="action-icon" ><i class="fa fa-refresh"></i></a> --}}
                                                 <button  class="action-icon" type="submit" style="background: none; padding: 0px; border: none;"><i style="color: #808080;"class="fa fa-refresh"></i></button>
@@ -100,7 +100,7 @@ $mobileMenu = Controller::mobileMenu();
 
                             <div class="row text-md bottom-button">
                                 <div class="col-7 mr-auto"><strong><a href="{{url('/guest-checkout')}}" style="color: #fff;">Proceed to pay</a></strong></div>
-                                <div class="col-5 mr-auto" id="totalDisplay" style="color: #fff;"><strong>Ksh. {{ $total }}</strong></div>
+                                <div class="col-5 mr-auto" id="totalDisplay" style="color: #fff;"><strong>$. {{ $total }}</strong></div>
                             </div>
                         </div>
                         </div>
@@ -171,7 +171,7 @@ $mobileMenu = Controller::mobileMenu();
                                                             <h6 class="mb-0">{{$item->product_name}}</h6>
                                                             <span class="text-muted">{{$item->description}}</span>
                                                         </div>
-                                                        <span id="getPrice{{$item->id}}" class="text-md"> {{count($item->attributes) > 0 && $item->attributes[0]->size ? 'from' : '' }} Ksh. {{ count($item->attributes) > 0 && $item->attributes[0]->size ? $item->attributes[0]->size ? $item->attributes[0]->price ? $item->attributes[0]->price : 0 : 0 : $item->price}}</span>
+                                                        <span id="getPrice{{$item->id}}" class="text-md"> {{count($item->attributes) > 0 && $item->attributes[0]->size ? 'from' : '' }} $. {{ count($item->attributes) > 0 && $item->attributes[0]->size ? $item->attributes[0]->size ? $item->attributes[0]->price ? $item->attributes[0]->price : 0 : 0 : $item->price}}</span>
                                                     </div>
                                                     <div class="modal-body panel-details-container">
                                                         <form name="addtocartForm" id="addtocartForm{{ $item->id }}" action="{{url('add-to-cart/'.$item->id)}}" method="post">
@@ -196,7 +196,7 @@ $mobileMenu = Controller::mobileMenu();
                                                                                             <label class="custom-control custom-radio">
                                                                                                 <input name="accompaniment" value="{{ $getAccompaniment->id }}" type="radio" class="custom-control-input" required>
                                                                                                 <span class="custom-control-indicator"></span>
-                                                                                                <span class="custom-control-description">{{$getAccompaniment->accompaniment}} {{ $getAccompaniment->price ? ' ( + Ksh. ' . $getAccompaniment->price . ')' : '' }}</span>
+                                                                                                <span class="custom-control-description">{{$getAccompaniment->accompaniment}} {{ $getAccompaniment->price ? ' ( + $. ' . $getAccompaniment->price . ')' : '' }}</span>
                                                                                             </label>
                                                                                         @endif
                                                                                     @endif
@@ -220,7 +220,7 @@ $mobileMenu = Controller::mobileMenu();
                                                                                     <option value="">Select Size</option>
                                                                                     @foreach($item->attributes as $getSizes)
                                                                                         @if($getSizes->size)
-                                                                                            <option value="{{$getSizes->id}}">{{ $getSizes->size }} {{ $getSizes->price ? '(Ksh. ' . $getSizes->price . ')' : '' }}</option>
+                                                                                            <option value="{{$getSizes->id}}">{{ $getSizes->size }} {{ $getSizes->price ? '($. ' . $getSizes->price . ')' : '' }}</option>
                                                                                         @endif
                                                                                     @endforeach
                                                                                 </select>
@@ -326,14 +326,14 @@ $mobileMenu = Controller::mobileMenu();
 
                                                         <input name="quantity" style="width: 50px;" type="number" value="{{ $details['quantity'] }}" class="name" min="1" max="10" /><br />
                                                         @if(!empty($details['accompaniment']))
-                                                            <span class="name"> + {{ $details['accompaniment'] }} {{ $details['accompaniment_price'] ? '(Ksh. ' . $details['accompaniment_price'] . ')' : '' }}</span>
+                                                            <span class="name"> + {{ $details['accompaniment'] }} {{ $details['accompaniment_price'] ? '($. ' . $details['accompaniment_price'] . ')' : '' }}</span>
                                                         @endif
                                                         @if(!empty($details['accompaniment_size']))
                                                             <span class="name">Size : {{$details['accompaniment_size']}}</span>
                                                         @endif
                                                 </td>
-                                                <td id="getPrice" class="price">Ksh. {{ $details['price'] }} </td>
-                                                <td id="itemTotal" class="price">Ksh. {{ $details['price'] * $details['quantity'] }} </td>
+                                                <td id="getPrice" class="price">$. {{ $details['price'] }} </td>
+                                                <td id="itemTotal" class="price">$. {{ $details['price'] * $details['quantity'] }} </td>
                                                 <td class="actions">
                                                         {{-- <a href="{{url('/cart/update-cart/'.$id)}}" class="action-icon" ><i class="fa fa-refresh"></i></a> --}}
                                                         <button  class="action-icon" type="submit" style="background: none; padding: 0px; border: none;"><i style="color: #808080;"class="fa fa-refresh"></i></button>
@@ -350,7 +350,7 @@ $mobileMenu = Controller::mobileMenu();
 
                                     <div class="row text-md bottom-button">
                                         <div class="col-7 mr-auto"><strong><a href="{{url('/guest-checkout')}}" style="color: #fff;">Proceed to pay</a></strong></div>
-                                        <div class="col-5 mr-auto" id="totalDisplay" style="color: #fff;"><strong>Ksh. {{ $total }}</strong></div>
+                                        <div class="col-5 mr-auto" id="totalDisplay" style="color: #fff;"><strong>$. {{ $total }}</strong></div>
                                     </div>
                                 </div>
                             </div>
@@ -396,7 +396,7 @@ $mobileMenu = Controller::mobileMenu();
                                                                             <h6 class="mb-0">{{$item->product_name}}</h6>
                                                                             <span class="text-muted">{{$item->description}}</span>
                                                                         </div>
-                                                                        <span id="getPrice{{$item->id}}" class="text-md"> {{count($item->attributes) > 0 && $item->attributes[0]->size ? 'from' : '' }} Ksh. {{ count($item->attributes) > 0 && $item->attributes[0]->size ? $item->attributes[0]->size ? $item->attributes[0]->price ? $item->attributes[0]->price : 0 : 0 : $item->price}}</span>
+                                                                        <span id="getPrice{{$item->id}}" class="text-md"> {{count($item->attributes) > 0 && $item->attributes[0]->size ? 'from' : '' }} $. {{ count($item->attributes) > 0 && $item->attributes[0]->size ? $item->attributes[0]->size ? $item->attributes[0]->price ? $item->attributes[0]->price : 0 : 0 : $item->price}}</span>
                                                                     </div>
                                                                     <div class="modal-body panel-details-container">
                                                                         <form name="addtocartForm" id="addtocartForm{{ $item->id }}" action="{{url('add-to-cart/'.$item->id)}}" method="post">
@@ -421,7 +421,7 @@ $mobileMenu = Controller::mobileMenu();
                                                                                                             <label class="custom-control custom-radio">
                                                                                                                 <input name="accompaniment" value="{{ $getAccompaniment->id }}" type="radio" class="custom-control-input" required>
                                                                                                                 <span class="custom-control-indicator"></span>
-                                                                                                                <span class="custom-control-description">{{$getAccompaniment->accompaniment}} {{ $getAccompaniment->price ? ' ( + Ksh. ' . $getAccompaniment->price . ')' : '' }}</span>
+                                                                                                                <span class="custom-control-description">{{$getAccompaniment->accompaniment}} {{ $getAccompaniment->price ? ' ( + $. ' . $getAccompaniment->price . ')' : '' }}</span>
                                                                                                             </label>
                                                                                                         @endif
                                                                                                     @endif
@@ -445,7 +445,7 @@ $mobileMenu = Controller::mobileMenu();
                                                                                                     <option value="">Select Size</option>
                                                                                                     @foreach($item->attributes as $getSizes)
                                                                                                         @if($getSizes->size)
-                                                                                                            <option value="{{$getSizes->id}}">{{ $getSizes->size }} {{ $getSizes->price ? '(Ksh. ' . $getSizes->price . ')' : '' }}</option>
+                                                                                                            <option value="{{$getSizes->id}}">{{ $getSizes->size }} {{ $getSizes->price ? '($. ' . $getSizes->price . ')' : '' }}</option>
                                                                                                         @endif
                                                                                                     @endforeach
                                                                                                 </select>
@@ -492,7 +492,7 @@ $mobileMenu = Controller::mobileMenu();
                                                         <h6 class="mb-0">{{$item->product_name}}</h6>
                                                         <span class="text-muted">{{$item->description}}</span>
                                                     </div>
-                                                    <span id="getPrice{{$item->id}}" class="text-md"> {{count($item->attributes) > 0 && $item->attributes[0]->size ? 'from' : '' }} Ksh. {{ count($item->attributes) > 0 && $item->attributes[0]->size ? $item->attributes[0]->size ? $item->attributes[0]->price ? $item->attributes[0]->price : 0 : 0 : $item->price}}</span>
+                                                    <span id="getPrice{{$item->id}}" class="text-md"> {{count($item->attributes) > 0 && $item->attributes[0]->size ? 'from' : '' }} $. {{ count($item->attributes) > 0 && $item->attributes[0]->size ? $item->attributes[0]->size ? $item->attributes[0]->price ? $item->attributes[0]->price : 0 : 0 : $item->price}}</span>
                                                 </div>
                                                 <div class="modal-body panel-details-container">
                                                     <form name="addtocartForm" id="addtocartForm{{ $item->id }}" action="{{url('add-to-cart/'.$item->id)}}" method="post">
@@ -517,7 +517,7 @@ $mobileMenu = Controller::mobileMenu();
                                                                                         <label class="custom-control custom-radio">
                                                                                             <input name="accompaniment" value="{{ $getAccompaniment->id }}" type="radio" class="custom-control-input" required>
                                                                                             <span class="custom-control-indicator"></span>
-                                                                                            <span class="custom-control-description">{{$getAccompaniment->accompaniment}} {{ $getAccompaniment->price ? ' ( + Ksh. ' . $getAccompaniment->price . ')' : '' }}</span>
+                                                                                            <span class="custom-control-description">{{$getAccompaniment->accompaniment}} {{ $getAccompaniment->price ? ' ( + $. ' . $getAccompaniment->price . ')' : '' }}</span>
                                                                                         </label>
                                                                                     @endif
                                                                                 @endif
@@ -541,7 +541,7 @@ $mobileMenu = Controller::mobileMenu();
                                                                                 <option value="">Select Size</option>
                                                                                 @foreach($item->attributes as $getSizes)
                                                                                     @if($getSizes->size)
-                                                                                        <option value="{{$getSizes->id}}">{{ $getSizes->size }} {{ $getSizes->price ? '(Ksh. ' . $getSizes->price . ')' : '' }}</option>
+                                                                                        <option value="{{$getSizes->id}}">{{ $getSizes->size }} {{ $getSizes->price ? '($. ' . $getSizes->price . ')' : '' }}</option>
                                                                                     @endif
                                                                                 @endforeach
                                                                             </select>

@@ -39,14 +39,14 @@
                                                         {!! csrf_field() !!}
                                                         <input name="quantity" style="width: 50px;" type="number" value="{{ $details['quantity'] }}" class="name" min="1" max="10" /><br />
                                                         @if(!empty($details['accompaniment']))
-                                                            <span class="name"> + {{ $details['accompaniment'] }} {{ $details['accompaniment_price'] ? '(Ksh. ' . $details['accompaniment_price'] . ')' : '' }}</span>
+                                                            <span class="name"> + {{ $details['accompaniment'] }} {{ $details['accompaniment_price'] ? '($. ' . $details['accompaniment_price'] . ')' : '' }}</span>
                                                         @endif
                                                         @if(!empty($details['accompaniment_size']))
                                                             <span class="name">Size : {{$details['accompaniment_size']}}</span>
                                                         @endif
                                                 </td>
-                                                <td id="getPrice" class="price">Ksh. {{ $details['price'] }} </td>
-                                                <td id="itemTotal" class="price">Ksh. {{ $details['price'] * $details['quantity'] }} </td>
+                                                <td id="getPrice" class="price">$. {{ $details['price'] }} </td>
+                                                <td id="itemTotal" class="price">$. {{ $details['price'] * $details['quantity'] }} </td>
                                                 <td class="actions">
                                                         {{-- <a href="{{url('/cart/update-cart/'.$id)}}" class="action-icon" ><i class="fa fa-refresh"></i></a> --}}
                                                         <button  class="action-icon" type="submit" style="background: none; padding: 0px; border: none;"><i style="color: #808080;"class="fa fa-refresh"></i></button>
@@ -69,7 +69,7 @@
                                 <div class="cart-summary">
                                     {{--<div class="row">--}}
                                     {{--<div class="col-7 text-right text-muted">Order total:</div>--}}
-                                    {{--<div class="col-5"><strong>Ksh. {{$total }}</strong></div>--}}
+                                    {{--<div class="col-5"><strong>$. {{$total }}</strong></div>--}}
                                     {{--</div>--}}
                                     {{--<hr class="hr-sm" id="deliveryDetailsHr" >--}}
                                     <div class="row" id="deliveryChargeViewDiv">
@@ -83,7 +83,7 @@
                                     <div class="row text-md bottom-button">
 
                                         <div class="col-7 ml-auto" style="color: #fff;"><strong>Total</strong></div>
-                                        <div class="col-5 mr-auto" id="totalDisplay" style="color: #fff;"><strong>Ksh. {{ $total }}</strong></div>
+                                        <div class="col-5 mr-auto" id="totalDisplay" style="color: #fff;"><strong>$. {{ $total }}</strong></div>
                                     </div>
                                 </div>
                             </div>
