@@ -42,15 +42,20 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
+        $url = parse_url(getenv("mysql://bba433cea0a669:783fc284@us-cdbr-east-06.cleardb.net/heroku_0e5745a6dcb7cc4?reconnect=true"));
 
+        $host = $url["127.0.0.1"];
+        $username = $url["pizza_kyalo"];
+        $password = $url["Coding-20"];
+        $database = substr($url["pizzatest"], 1);
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('mysql://bba433cea0a669:783fc284@us-cdbr-east-06.cleardb.net/heroku_0e5745a6dcb7cc4?reconnect=true'),
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'url' => $url,
+            'host' => $host,
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'pizzatest'),
-            'username' => env('DB_USERNAME', 'pizza_kyalo'),
-            'password' => env('DB_PASSWORD', 'Coding-20'),
+            'database' => $database,
+            'username' => $username,
+            'password' => $$password,
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
