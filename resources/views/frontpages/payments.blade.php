@@ -97,13 +97,13 @@
                             <form action="{{url('/payments/process')}}" method="POST" enctype="multipart/form-data" id="paymentForm" data-validate>
                             @csrf
                                 <h4 class="border-bottom pb-4"><i class="ti ti-wallet mr-3 text-primary"></i>Payment</h4>
-                                <div class="row text-lg">
+                                <div class="row text-lg"><!-- 
                                     <div class="col-6  form-group">
                                         <label class="custom-control custom-radio">
                                             <input type="radio" name="payment_type" value="mpesa" class="custom-control-input" checked="checked" id="payment_type" required>
                                             <span class="custom-control-indicator"></span>
                                             <span class="custom-control-description">Mpesa</span>
-                                        </label>
+                                        </label> -->
                                     </div>
                                     <div class="col-6 form-group">
                                         <label class="custom-control custom-radio">
@@ -112,7 +112,7 @@
                                             <span class="custom-control-description">Cash</span>
                                         </label>
                                     </div>
-                                </div>
+                                </div><!-- 
 
                                 <div class="row text-lg" id="mpesaContent">
                                     <div class="form-group col-md-12" id="mpesa-extra-details">
@@ -126,7 +126,7 @@
                                         <label>Phone Number <small>(e.g. 0700112233)</small></label>
                                         <input type="text" name="phoneNumber" id="paymentPhoneNumber" class="form-control" placeholder="e.g. 0711223344" required autocomplete="off" minlength="10" maxlength="10" value="{{ session('user_details') ? session('user_details')['mobile'] ? ('0' . session('user_details')['mobile']) : '' : '' }}" />
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="row text-lg" id="cashContent">
                                     <div class="form-group col-md-12">
