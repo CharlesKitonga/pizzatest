@@ -14,8 +14,6 @@ $getMenu = Controller::getMenu();
                 <!-- Logo -->
                 <div class="module module-logo light">
                     <a href="{{url('/')}}">
-                        {{-- <img src="{{asset('assets/img/kilimanjaro-new-logo.jpeg')}}" alt="" height="230px" width="230px"/> --}}
-                        <img src="{{asset('assets/img/kilimanjaro-new-logo.jpeg')}}" alt="" height="193px" width="193px"/>
                     </a>
                 </div>
             </div>
