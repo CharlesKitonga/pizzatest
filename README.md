@@ -20,8 +20,8 @@ This is a new E-commerce platform that entails pizza delivery. It has been done 
 
 ## The Application is composed of:
 
--Admin Dashboard
--User/Customer Interface
+- Admin Dashboard
+- User/Customer Interface
 
 ## Admin Dashboard
 
@@ -32,7 +32,7 @@ following features:
 - **Management module with-: Categories, Products & Users Component**
 - **Manage Orders component**
 - **Profile component**
-- **LOGOUT**
+- **Logout**
 
 ## User/Customer Interface
 
